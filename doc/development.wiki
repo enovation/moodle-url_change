@@ -1,0 +1,28 @@
+== urlmove development notes ==
+
+=== General Comments ===
+
+* The urlmove.php script depends on the following:
+** Doctrine 2.3 (DBAL only)
+** GetOptionKit 1.2.0
+* The mainline invokes 5 functions at points:
+** parse_commandline() - which uses the GetOptionKit library to parse the commandline arguments
+** open_db_connections() - which opens two connections to the database - the primary one being the Doctrine DBAL connection, and the other a PDO connection which is solely to utilise the PDO::quote() method for db independence.
+** base64partial() - which returns the 3 base 64 encoding variations of a string
+** search() - which searches the database for occurrences of a set of strings (the plain & base 64 variants)
+** getSQLStatements() - which returns the two UPDATE SQL statements for each match (one for replacing, and one for reverting)
+* The operations that generate the replace.sql and the revert.sql scripts both depend upon the results returned by the '''search''' function, thus ensuring that the search operation provides a reliable preview of the affected database records.
+* One issue appears to be that GetOptionKit doesn't enforce mandatory options (though perhaps I am misunderstanding the documentation / examples?)
+* Currently, the script has only been tested on a Linux (Ubuntu 12.x) / MySQL (5.5) configuration. It *should* work with others, however, the mysql driver selection has been hardcoded at this point.
+
+=== To Do ===
+
+* Potentially, have the replace / revert options merely output to stdout, rather than specific filenames. This would be more UNIX-like and expected.
+* Similarly, might have the 'exclude list' filename supplied as an option rather than a hardcoded filename.
+* Test and debug on Windows platform.
+* Test and debug with other DBs (Postgres, MS SQL Server)
+
+
+
+
+

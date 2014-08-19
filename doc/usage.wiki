@@ -1,8 +1,4 @@
-#moodle-url_change
-
-A script to change hardcoded URLs in Moodle databases
-
-##Description
+== urlmove usage ==
 
 urlmove is a commandline utility that can be used to replace all occurrences of a specified URL with another throughout a Moodle installation database. 
 
@@ -22,7 +18,7 @@ mdl_sessions.*
 ** replace - generates a file '''replace.sql''' containing a set of SQL statements which, if executed against the database as-is, will replace occurrences of the old URL with the new URL. Both plaintext and base64 encoded representations of the source string will be matched, and base64 representations of the old URL will be replaced by the base64 encoded representation of the new URL.  Only tables which do not have a field named '''id''' and tables / columns which are both specified in the fields file and not specified in the excluded file will be considered.
 ** revert - generates a file '''revert.sql''' containing  a set of SQL statements which, if executed immediately after '''replace.sql''' (and assuming no external DB updates) will return the database to the initial state. Only tables which have a field named '''id''' and tables / columns which are specified in the fields file and not specified in the excluded file will be considered.
 
-##Usage
+=== Usage: ===
 
 urlmove.php [OPTIONS] replace URL1 URL2
 urlmove.php [OPTIONS] revert URL1 URL2

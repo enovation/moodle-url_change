@@ -1,0 +1,9 @@
+{
+    "name": "enovation/moodle-url_change",
+    "description": "change_hardcoded_URLs_in_Moodle_databases",
+    "minimum-stability": "stable",
+    "require": {
+        "c9s/GetOptionKit": "2.0.3",
+        "doctrine/dbal": "2.5.x-dev"
+    }
+}
